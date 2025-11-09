@@ -1,4 +1,4 @@
-from utils.logger import logger
+from utils.logger_config import logger
 from playwright.sync_api import Page, expect
 import time
 import logging
@@ -31,7 +31,7 @@ class LoginClass:
             self.page.goto(url)
             self.page.wait_for_load_state("networkidle")
             timestamp = time.strftime("%Y%m%d_%H%M%S")
-            screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//screenshots//login_form{timestamp}.png"
+            screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form{timestamp}.png"
             self.page.screenshot(path=screenshot_path)
             logger.info(f"Screenshot saved at {screenshot_path}")
             site_url = self.page.url
@@ -58,7 +58,7 @@ class LoginClass:
             password_field.fill(password)
 
             timestamp = time.strftime("%Y%m%d_%H%M%S")
-            screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//screenshots//login_form_{timestamp}.png"
+            screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form_{timestamp}.png"
             self.page.screenshot(path=screenshot_path)
             self.page.wait_for_timeout(2000)
 
@@ -108,7 +108,7 @@ class LoginClass:
 
             if "Users" in page_title:
                 timestamp = time.strftime("%Y%m%d_%H%M%S")
-                screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//screenshots//home_page_{timestamp}.png"
+                screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//home_page_{timestamp}.png"
                 self.page.screenshot(path=screenshot_path)
                 self.page.wait_for_timeout(3000)
                 return "Login Successful"
