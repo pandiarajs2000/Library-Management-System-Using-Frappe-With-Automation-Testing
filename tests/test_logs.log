@@ -1,0 +1,116 @@
+2025-11-09 15:25:43,914 - utils.logger_config - DEBUG - Debug log: useful for troubleshooting.
+2025-11-09 15:25:43,915 - utils.logger_config - INFO - Info log: shows normal execution steps.
+2025-11-09 15:25:43,915 - utils.logger_config - WARNING - Warning log: something might be off.
+2025-11-09 15:25:43,915 - utils.logger_config - ERROR - Error log: something failed.
+2025-11-09 15:25:43,915 - utils.logger_config - CRITICAL - Critical log: major failure.
+2025-11-09 15:25:45,491 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:25:45,492 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:25:47,671 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_152547.png
+2025-11-09 15:25:47,672 - utils.logger_config - INFO - Attempting login with Email: pandiarajs2000@gmail.com | Password: Test@123
+2025-11-09 15:25:50,115 - utils.logger_config - INFO - Clicked login button.
+2025-11-09 15:26:00,152 - utils.logger_config - INFO - Search the Library Member List
+2025-11-09 15:26:00,828 - utils.logger_config - INFO - Click the Add New Libary Member Button
+2025-11-09 15:26:02,261 - utils.logger_config - INFO - Attempting the Library Member Page
+2025-11-09 15:26:03,737 - utils.logger_config - INFO - member id text MEMBER-0060
+2025-11-09 15:26:04,083 - utils.logger_config - INFO - Document saved successfully via page indicator.MEMBER-0060
+2025-11-09 15:26:04,716 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:26:04,717 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:26:06,859 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_152606.png
+2025-11-09 15:26:06,860 - utils.logger_config - INFO - Attempting login with Email: pandiarajs2000@gmail.com | Password: Test@123
+2025-11-09 15:26:09,244 - utils.logger_config - INFO - Clicked login button.
+2025-11-09 15:26:19,074 - utils.logger_config - INFO - Search the Library Member List
+2025-11-09 15:26:19,705 - utils.logger_config - INFO - Click the Add New Libary Member Button
+2025-11-09 15:26:20,872 - utils.logger_config - INFO - Attempting the Library Member Page
+2025-11-09 15:26:56,076 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:26:56,076 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:26:58,152 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_152658.png
+2025-11-09 15:26:58,153 - utils.logger_config - INFO - Attempting login with Email: pandiarajs2000@gmail.com | Password: Test@123
+2025-11-09 15:27:00,538 - utils.logger_config - INFO - Clicked login button.
+2025-11-09 15:27:10,495 - utils.logger_config - INFO - Search the Library Member List
+2025-11-09 15:27:11,147 - utils.logger_config - INFO - Click the Add New Libary Member Button
+2025-11-09 15:27:12,086 - utils.logger_config - INFO - Attempting the Library Member Page
+2025-11-09 15:27:13,716 - utils.logger_config - INFO - member id text MEMBER-0061
+2025-11-09 15:27:13,898 - utils.logger_config - INFO - Document saved successfully via page indicator.MEMBER-0061
+2025-11-09 15:27:13,899 - utils.logger_config - ERROR - DEFECT: Duplicate member was saved successfullt - Validation is message is not shown.
+2025-11-09 15:27:17,588 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:27:17,589 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:27:19,571 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_152719.png
+2025-11-09 15:27:19,572 - utils.logger_config - INFO - Attempting login with Email: pandiarajs2000@gmail.com | Password: Test@123
+2025-11-09 15:27:21,952 - utils.logger_config - INFO - Clicked login button.
+2025-11-09 15:27:31,907 - utils.logger_config - INFO - Search the Library Member List
+2025-11-09 15:27:32,550 - utils.logger_config - INFO - Click the Add New Libary Member Button
+2025-11-09 15:27:33,544 - utils.logger_config - INFO - Attempting the Library Member Page
+2025-11-09 15:28:05,125 - utils.logger_config - WARNING - Mandatory fields required in Library Member
+
+
+Full Name
+2025-11-09 15:28:05,125 - utils.logger_config - ERROR - While saving the new member = Mandatory fields required in Library Member
+
+
+Full Name
+2025-11-09 15:28:08,750 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:28:08,761 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:28:10,715 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_152810.png
+2025-11-09 15:28:10,715 - utils.logger_config - INFO - Attempting login with Email: pandiarajs2000@gmail.com | Password: Test@123
+2025-11-09 15:28:13,195 - utils.logger_config - INFO - Clicked login button.
+2025-11-09 15:28:22,971 - utils.logger_config - INFO - Search the Library Member List
+2025-11-09 15:28:23,615 - utils.logger_config - INFO - Click the Add New Libary Member Button
+2025-11-09 15:28:24,711 - utils.logger_config - INFO - Attempting the Library Member Page
+2025-11-09 15:28:56,355 - utils.logger_config - WARNING - Mandatory fields required in Library Member
+
+
+Email
+2025-11-09 15:28:56,355 - utils.logger_config - ERROR - While saving the new member = Mandatory fields required in Library Member
+
+
+Email
+2025-11-09 15:28:59,991 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:28:59,991 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:29:01,935 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_152901.png
+2025-11-09 15:29:01,936 - utils.logger_config - INFO - Attempting login with Email: pandiarajs2000@gmail.com | Password: Test@123
+2025-11-09 15:29:04,326 - utils.logger_config - INFO - Clicked login button.
+2025-11-09 15:29:14,438 - utils.logger_config - INFO - Search the Library Member List
+2025-11-09 15:29:15,076 - utils.logger_config - INFO - Click the Add New Libary Member Button
+2025-11-09 15:29:16,024 - utils.logger_config - INFO - Attempting the Library Member Page
+2025-11-09 15:29:47,940 - utils.logger_config - WARNING - Mandatory fields required in Library Member
+
+
+Full Name
+Email
+2025-11-09 15:29:47,940 - utils.logger_config - ERROR - While saving the new member = Mandatory fields required in Library Member
+
+
+Full Name
+Email
+2025-11-09 15:29:51,333 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:29:51,334 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:29:53,277 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_152953.png
+2025-11-09 15:29:53,277 - utils.logger_config - INFO - Attempting login with Email: pandiarajs2000@gmail.com | Password: Test@123
+2025-11-09 15:29:55,652 - utils.logger_config - INFO - Clicked login button.
+2025-11-09 15:30:09,112 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:30:09,112 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:30:11,505 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_153011.png
+2025-11-09 15:30:11,506 - utils.logger_config - INFO - Attempting login with Email: pandiaraj@123.com | Password: Test123
+2025-11-09 15:30:14,022 - utils.logger_config - INFO - Clicked login button.
+2025-11-09 15:30:16,048 - utils.logger_config - INFO - Login Fail Actual Text Invalid Login. Try again.
+2025-11-09 15:30:19,423 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:30:19,424 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:30:21,356 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_153021.png
+2025-11-09 15:30:21,357 - utils.logger_config - INFO - Attempting login with Email:  | Password: Test@123
+2025-11-09 15:30:23,695 - utils.logger_config - INFO - Email validation message: Please fill out this field.
+2025-11-09 15:30:27,092 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:30:27,092 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:30:28,980 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_153028.png
+2025-11-09 15:30:28,981 - utils.logger_config - INFO - Attempting login with Email: pandiaraj@tridotstech.com | Password: 
+2025-11-09 15:30:31,343 - utils.logger_config - INFO - Password validation message: Please fill out this field.
+2025-11-09 15:30:34,713 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:30:34,713 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:30:36,647 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_153036.png
+2025-11-09 15:30:36,647 - utils.logger_config - INFO - Attempting login with Email: 12344456789 | Password: 5677
+2025-11-09 15:30:39,011 - utils.logger_config - INFO - Clicked login button.
+2025-11-09 15:30:41,032 - utils.logger_config - INFO - Login Fail Actual Text Invalid Login. Try again.
+2025-11-09 15:30:44,410 - utils.logger_config - INFO - Navigating to login page
+2025-11-09 15:30:44,410 - utils.logger_config - INFO - Navigating to login page: http://127.0.0.1:8001/#login
+2025-11-09 15:30:46,508 - utils.logger_config - INFO - Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_153046.png
+2025-11-09 15:30:46,509 - utils.logger_config - INFO - Attempting login with Email:  | Password: 
+2025-11-09 15:30:48,832 - utils.logger_config - INFO - Email validation message: Please fill out this field.
