@@ -1,0 +1,10 @@
+[32mINFO    [0m utils.logger_config:test_library_member.py:48 Navigating to login page
+[32mINFO    [0m utils.logger_config:login_page.py:30 Navigating to login page: http://127.0.0.1:8001/#login
+[32mINFO    [0m utils.logger_config:login_page.py:36 Screenshot saved at //home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form20251109_152004.png
+[32mINFO    [0m utils.logger_config:login_page.py:47 Attempting login with Email: pandiarajs2000@gmail.com | Password: Test@123
+[32mINFO    [0m utils.logger_config:login_page.py:86 Clicked login button.
+[32mINFO    [0m utils.logger_config:library_member.py:26 Search the Library Member List
+[32mINFO    [0m utils.logger_config:library_member.py:33 Click the Add New Libary Member Button
+[32mINFO    [0m utils.logger_config:library_member.py:37 Attempting the Library Member Page
+[32mINFO    [0m utils.logger_config:library_member.py:89 member id text MEMBER-0057
+[32mINFO    [0m utils.logger_config:library_member.py:93 Document saved successfully via page indicator.MEMBER-0057
