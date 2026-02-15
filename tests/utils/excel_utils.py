@@ -13,3 +13,20 @@ def write_data(file_path, sheet_name, row, column, data):
         raise ValueError(f"Sheet '{sheet_name}' not found in the workbook.")
     worksheet.cell(row=row, column=column, value=data)
     workbook.save(file_path)
+
+def read_data_from_excel(file_path, sheet_name):
+    workbook = openpyxl.load_workbook(file_path)
+    sheet = workbook[sheet_name]
+
+    # fetch the first row as header
+    headers = [cell.value for cell in sheet[1]]
+    
+    print(headers)
+
+    # fetch the data
+    data_list = []
+
+    for data in sheet.iter_rows(min_row=2, values_only=True):
+        row_dict = dict(zip(headers, data))
+        data_list.append(row_dict)
+    return data_list

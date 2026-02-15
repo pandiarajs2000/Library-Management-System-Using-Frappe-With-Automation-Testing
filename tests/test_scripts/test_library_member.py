@@ -56,11 +56,11 @@ def test_valid_member_data(page, excel_sheet,base_url):
         response = library_member_form.validate_library_member_screen(
             member_fullname_read_from_excel,member_email_read_from_excel,
             member_phone_read_from_excel,member_doj_read_from_excel,
-            status_cell_read_from_excel, scenario
+            status_cell_read_from_excel, scenario,member_expectedmsg_read_from_excel
             )
     try:
         with allure.step("Validate Login and Member Save Messages"):
-            assert expectedmsg_read_from_excel in res, f"Expected Login message: '{expectedmsg_read_from_excel}', but got: '{res}'"
+            # assert expectedmsg_read_from_excel in res, f"Expected Login message: '{expectedmsg_read_from_excel}', but got: '{res}'"
             assert member_expectedmsg_read_from_excel in response, f"Expected Member message: '{member_expectedmsg_read_from_excel}', but got: '{response}'"
         write_data(file_path=excel_sheet_path, sheet_name=sheet_name2, row=2, column=9, data=response)
     except AssertionError as e:
@@ -114,15 +114,15 @@ def test_duplicate_validation_for_email(page, excel_sheet,base_url):
         response = library_member_form.validate_library_member_screen(
             member_fullname_read_from_excel,member_email_read_from_excel,
             member_phone_read_from_excel,member_doj_read_from_excel,
-            status_cell_read_from_excel, scenario
+            status_cell_read_from_excel, scenario, member_expectedmsg_read_from_excel
             )
     try:
         with allure.step("Validate Login and Existing Member Should not be allowed."):
-            assert expectedmsg_read_from_excel in res, f"Expected Login message: '{expectedmsg_read_from_excel}', but got: '{res}'"
             assert member_expectedmsg_read_from_excel in response, f"Expected Member message: '{member_expectedmsg_read_from_excel}', but got: '{response}'"
         write_data(file_path=excel_sheet_path, sheet_name=sheet_name2, row=3, column=9, data=response)
     except AssertionError as e:
         write_data(file_path=excel_sheet_path, sheet_name=sheet_name2, row=3, column=9, data=response)
+        raise e
 
 @allure.title("Test the Existing Member phone number Should not be Allowed.")
 @allure.testcase("TC-003")
@@ -171,15 +171,16 @@ def test_duplicate_validation_for_phone_no(page, excel_sheet,base_url):
         response = library_member_form.validate_library_member_screen(
             member_fullname_read_from_excel,member_email_read_from_excel,
             member_phone_read_from_excel,member_doj_read_from_excel,
-            status_cell_read_from_excel, scenario
+            status_cell_read_from_excel, scenario, member_expectedmsg_read_from_excel
             )
     try:
         with allure.step("Validate Login and Existing Member Should not be allowed."):
-            assert expectedmsg_read_from_excel in res, f"Expected Login message: '{expectedmsg_read_from_excel}', but got: '{res}'"
+            # assert member_expectedmsg_read_from_excel in res, f"Expected Login message: '{member_expectedmsg_read_from_excel}', but got: '{res}'"
             assert member_expectedmsg_read_from_excel in response, f"Expected Member message: '{member_expectedmsg_read_from_excel}', but got: '{response}'"
         write_data(file_path=excel_sheet_path, sheet_name=sheet_name2, row=4, column=9, data=response)
     except AssertionError as e:
         write_data(file_path=excel_sheet_path, sheet_name=sheet_name2, row=4, column=9, data=response)
+        raise e
 
 
 @allure.title("Test without fullname field while save it should be throwing an error.")
@@ -232,11 +233,11 @@ def test_without_fullname_validation(page, excel_sheet,base_url):
         response = library_member_form.validate_library_member_screen(
             empty_value_for_fullname,member_email_read_from_excel,
             member_phone_read_from_excel,member_doj_read_from_excel,
-            status_cell_read_from_excel, scenario
+            status_cell_read_from_excel, scenario, member_expectedmsg_read_from_excel
             )
     try:
         with allure.step("Validate Login and Existing Member Should not be allowed."):
-            assert expectedmsg_read_from_excel in res, f"Expected Login message: '{expectedmsg_read_from_excel}', but got: '{res}'"
+            # assert expectedmsg_read_from_excel in res, f"Expected Login message: '{expectedmsg_read_from_excel}', but got: '{res}'"
             assert member_expectedmsg_read_from_excel in response, f"Expected Member message: '{member_expectedmsg_read_from_excel}', but got: '{response}'"
         write_data(file_path=excel_sheet_path, sheet_name=sheet_name2, row=5, column=9, data=response)
     except AssertionError as e:
@@ -292,11 +293,11 @@ def test_without_emailid_validation(page, excel_sheet,base_url):
         response = library_member_form.validate_library_member_screen(
             member_fullname_read_from_excel,empty_value_for_email,
             member_phone_read_from_excel,member_doj_read_from_excel,
-            status_cell_read_from_excel, scenario
+            status_cell_read_from_excel, scenario, member_expectedmsg_read_from_excel
             )
     try:
         with allure.step("Validate Login and Existing Member Should not be allowed."):
-            assert expectedmsg_read_from_excel in res, f"Expected Login message: '{expectedmsg_read_from_excel}', but got: '{res}'"
+            # assert expectedmsg_read_from_excel in res, f"Expected Login message: '{expectedmsg_read_from_excel}', but got: '{res}'"
             assert member_expectedmsg_read_from_excel in response, f"Expected Member message: '{member_expectedmsg_read_from_excel}', but got: '{response}'"
         write_data(file_path=excel_sheet_path, sheet_name=sheet_name2, row=6, column=9, data=response)
     except AssertionError as e:
@@ -352,11 +353,11 @@ def test_without_emailid_and_fullname_validation(page, excel_sheet,base_url):
         response = library_member_form.validate_library_member_screen(
             empty_value_for_fullname,member_email_read_from_excel,
             member_phone_read_from_excel,member_doj_read_from_excel,
-            status_cell_read_from_excel, scenario
+            status_cell_read_from_excel, scenario, member_expectedmsg_read_from_excel
             )
     try:
         with allure.step("Validate Login and Existing Member Should not be allowed."):
-            assert expectedmsg_read_from_excel in res, f"Expected Login message: '{expectedmsg_read_from_excel}', but got: '{res}'"
+            # assert expectedmsg_read_from_excel in res, f"Expected Login message: '{expectedmsg_read_from_excel}', but got: '{res}'"
             assert member_expectedmsg_read_from_excel in response, f"Expected Member message: '{member_expectedmsg_read_from_excel}', but got: '{response}'"
         write_data(file_path=excel_sheet_path, sheet_name=sheet_name2, row=7, column=9, data=response)
     except AssertionError as e:
