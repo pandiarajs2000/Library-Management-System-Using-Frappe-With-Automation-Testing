@@ -37,11 +37,7 @@ class BookDetails:
             book_title = str(book_title or "").strip()
             author_name = str(author_name or "").strip()
             publisher_name = str(publisher_name or "")
-            book_category = str(book_category or "").strip()
-            isbn = str(isbn or "").strip()
-            total_copy = int(total_copy or "")
-            available_copy = int(available_copy or "")
-            
+            book_category = str(book_category or "").strip()            
             
             book_title_input = self.page.locator(self.book_title_xpath)
             book_title_input.clear()
@@ -50,14 +46,20 @@ class BookDetails:
             author_name_input = self.page.locator(self.author_name_xpath)
             author_name_input.clear()
             author_name_input.fill(author_name)
+            self.page.keyboard.press('ArrowDown')
+            author_name_input.click()
             
             publisher_name_input = self.page.locator(self.publisher_name_xpath)
             publisher_name_input.clear()
             publisher_name_input.fill(publisher_name)
+            self.page.keyboard.press('ArrowDown')
+            publisher_name_input.click()
             
             book_category_input = self.page.locator(self.book_category_xpath)
             book_category_input.clear()
             book_category_input.fill(book_category)
+            self.page.keyboard.press('ArrowDown')
+            book_category_input.click()
             
             isbn_input = self.page.locator(self.isbn_xpath)
             isbn_input.clear()

@@ -1,8 +1,9 @@
 from playwright.sync_api import Page, expect
 from utils.logger_config import logger
-from datetime import datetime, timedelta
+from datetime import datetime
 import traceback
 import time
+import os
 
 class LibraryMember:
     def __init__(self, page: Page):
@@ -20,7 +21,7 @@ class LibraryMember:
         self.member_id_xpath = "//li[@class='disabled']//a[starts-with(text(), 'MEMBER-')]"
         self.error_popup_xpath = "//div[@class='msgprint']"
 
-    def validate_library_member_screen(self,fullname, email, phone, doj,status, scenario):
+    def validate_library_member_screen(self,fullname, email, phone, doj,status, scenario, member_expectedmsg_read_from_excel):
         
         try:
             logger.info("Search the Library Member List")
@@ -57,7 +58,7 @@ class LibraryMember:
             print("Date Value", doj, type(doj))
 
             if isinstance(doj, datetime):
-                date_str = doj.strftime("%d-%m-%Y")
+                date_str = doj.strftime("%Y-%m-%d")
             else:
                 date_str = str(doj).split(" ")[0].strip()
 
@@ -65,10 +66,9 @@ class LibraryMember:
 
             doj_input = self.page.locator(self.date_of_join_xpath)
             doj_input.click()
-            self.page.keyboard.press("Control+A")
-            self.page.keyboard.press("Backspace")
-            self.page.keyboard.type(date_str)
-            self.page.keyboard.press("Tab")
+            doj_input.fill("")  # clear any existing value
+            doj_input.fill(date_str)  # directly fill the value
+            self.page.keyboard.press("Tab")  # trigger blur/validation
 
             status_select = self.page.locator(self.status_xpath)
             status_select.wait_for(state="visible", timeout=5000)
@@ -88,7 +88,7 @@ class LibraryMember:
                 popup_message = member_id.inner_text()
                 logger.info(f"member id text {popup_message}")
                 timestamp = time.strftime("%Y%m%d_%H%M%S")
-                screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//member_data_save_{timestamp}.png"
+                screenshot_path = os.path.join("tests", "screenshots", f"member_data_save_{timestamp}.png")
                 self.page.screenshot(path=screenshot_path)
                 logger.info(f"Document saved successfully via page indicator.{popup_message}")
 
@@ -96,9 +96,9 @@ class LibraryMember:
                 error_popup = self.page.locator(self.error_popup_xpath)
                 try:
                     popup_message = error_popup.inner_text().strip()
-                    self.page.wait_for_timeout(state="visible", timeout=5000)
+                    error_popup.wait_for(state="visible", timeout=5000)
                     timestamp = time.strftime("%Y%m%d_%H%M%S")
-                    screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//failed_one_{timestamp}.png"
+                    screenshot_path = os.path.join("tests", "screenshots", f"failed_one_{timestamp}.png")
                     self.page.screenshot(path=screenshot_path)
                     logger.info(f"Error Message : {popup_message}")
                     logger.error("This member is already exists in the library members list.")
@@ -112,26 +112,26 @@ class LibraryMember:
                     return "Saved"
                 else:
                     logger.error(f"While saving the new member = {popup_message}")
-                    assert False, f"expected 'Saved' but got '{popup_message}' "
+                    raise ValueError(f"expected '{member_expectedmsg_read_from_excel}' but got '{popup_message}' ")
             elif scenario == "Duplicate":
                 if "MEMBER-" in popup_message:
                     print("Scenario", scenario)
                     print("DEFECT: Duplicate member was saved successfullt - Validation is message is not shown.")
                     logger.error("DEFECT: Duplicate member was saved successfullt - Validation is message is not shown.")
-                    assert False, f"DEFECT: Duplicate member was saved successfullt - Validation is message is not shown."
+                    return f"DEFECT: Duplicate member was saved successfullt - Validation is message is not shown."
                 elif "exists" in popup_message.lower() or "duplicate" in popup_message.lower():
                     logger.info("Validation worked correctly — duplicate member not allowed.")
                     return "This member already exists"
                 else:
                     logger.warning(f"Unexpected message for duplicate scenario: {popup_message}")
                     timestamp = time.strftime("%Y%m%d_%H%M%S")
-                    screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//failed_two_{timestamp}.png"
+                    screenshot_path = os.path.join("tests", "screenshots", f"failed_two_{timestamp}.png")
                     self.page.screenshot(path=screenshot_path)
                     return "Mandatory for Some Fields."
             else:
                 logger.warning(f"Invalid scenario: {scenario}")
                 timestamp = time.strftime("%Y%m%d_%H%M%S")
-                screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//failed_three_{timestamp}.png"
+                screenshot_path = os.path.join("tests", "screenshots", f"failed_three_{timestamp}.png")
                 self.page.screenshot(path=screenshot_path)
                 return "Invalid Scenario"
 
