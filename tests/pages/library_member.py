@@ -5,6 +5,7 @@ import traceback
 import time
 import os
 
+
 class LibraryMember:
     def __init__(self, page: Page):
         self.page = page
@@ -21,121 +22,99 @@ class LibraryMember:
         self.member_id_xpath = "//li[@class='disabled']//a[starts-with(text(), 'MEMBER-')]"
         self.error_popup_xpath = "//div[@class='msgprint']"
 
-    def validate_library_member_screen(self,fullname, email, phone, doj,status, scenario, member_expectedmsg_read_from_excel):
-        
+    def _read_popup_message(self):
+        error_popup = self.page.locator(self.error_popup_xpath)
+        if error_popup.is_visible(timeout=3000):
+            return error_popup.inner_text().strip()
+        return ''
+
+    def validate_library_member_screen(self, fullname, email, phone, doj, status, scenario, member_expectedmsg_read_from_excel):
         try:
-            logger.info("Search the Library Member List")
+            logger.info('Search the Library Member List')
             search_input = self.page.locator(self.search_box_xpath)
-            search_input.fill("Library Member")
-            search_input.press("ArrowDown")
+            search_input.fill('Library Member')
+            search_input.press('ArrowDown')
             self.page.wait_for_timeout(500)
-            search_input.press("Enter")
+            search_input.press('Enter')
 
-            logger.info("Click the Add New Libary Member Button")
-            add_new_btn = self.page.locator(self.add_library_member)
-            add_new_btn.click()
+            logger.info('Click the Add New Library Member Button')
+            self.page.locator(self.add_library_member).click()
 
-            logger.info("Attempting the Library Member Page")
-            fullname = str(fullname or "").strip()
-            email = str(email or "").strip()
-            phone = str(phone or "")
-            status = str(status or "").strip()
+            fullname = str(fullname or '').strip()
+            email = str(email or '').strip()
+            phone = str(phone or '').strip()
+            status = str(status or '').strip()
 
-            print("Date Value", type(doj))
-            
             fullname_input = self.page.locator(self.full_name_xpath)
-            fullname_input.clear()
+            fullname_input.fill('')
             fullname_input.fill(fullname)
 
             email_input = self.page.locator(self.email_xpath)
-            email_input.clear()
+            email_input.fill('')
             email_input.fill(email)
-            
+
             phone_input = self.page.locator(self.phone_xpath)
-            phone_input.clear()
+            phone_input.fill('')
             phone_input.fill(phone)
 
-            print("Date Value", doj, type(doj))
-
             if isinstance(doj, datetime):
-                date_str = doj.strftime("%Y-%m-%d")
+                date_str = doj.strftime('%Y-%m-%d')
             else:
-                date_str = str(doj).split(" ")[0].strip()
-
-            print("Final Date Value to fill:", date_str)
+                date_str = str(doj or '').split(' ')[0].strip()
 
             doj_input = self.page.locator(self.date_of_join_xpath)
             doj_input.click()
-            doj_input.fill("")  # clear any existing value
-            doj_input.fill(date_str)  # directly fill the value
-            self.page.keyboard.press("Tab")  # trigger blur/validation
+            doj_input.fill('')
+            if date_str:
+                doj_input.fill(date_str)
+                self.page.keyboard.press('Tab')
 
-            status_select = self.page.locator(self.status_xpath)
-            status_select.wait_for(state="visible", timeout=5000)
-            status_select.select_option(label=status)
-            expect(status_select).to_have_value(status)
+            if status:
+                status_select = self.page.locator(self.status_xpath)
+                status_select.wait_for(state='visible', timeout=5000)
+                status_select.select_option(label=status)
+                expect(status_select).to_have_value(status)
 
+            self.page.locator(self.save_btn_xpath).click()
+            self.page.wait_for_timeout(1000)
 
-            save_btn = self.page.locator(self.save_btn_xpath)
-            save_btn.click()
-            self.page.wait_for_timeout(500)
+            member_id = ''
+            popup_message = ''
 
-            popup_message=""
+            # Prefer success path first
             try:
-                saved_label = self.page.locator(self.save_doc_id)
-                saved_label.wait_for(state="visible", timeout=5000)
-                member_id = self.page.locator(self.member_id_xpath)
-                popup_message = member_id.inner_text()
-                logger.info(f"member id text {popup_message}")
-                timestamp = time.strftime("%Y%m%d_%H%M%S")
-                screenshot_path = os.path.join("tests", "screenshots", f"member_data_save_{timestamp}.png")
+                self.page.locator(self.save_doc_id).wait_for(state='visible', timeout=5000)
+                member_id = self.page.locator(self.member_id_xpath).inner_text().strip()
+                popup_message = member_id
+                logger.info(f'member id text {popup_message}')
+                screenshot_path = os.path.join('tests', 'screenshots', f"member_data_save_{time.strftime('%Y%m%d_%H%M%S')}.png")
                 self.page.screenshot(path=screenshot_path)
-                logger.info(f"Document saved successfully via page indicator.{popup_message}")
+                logger.info('Document saved successfully via page indicator.')
+            except Exception:
+                popup_message = self._read_popup_message()
+                if popup_message:
+                    screenshot_path = os.path.join('tests', 'screenshots', f"failed_{time.strftime('%Y%m%d_%H%M%S')}.png")
+                    self.page.screenshot(path=screenshot_path)
+                    logger.info(f'Error Message : {popup_message}')
+                else:
+                    popup_message = 'Unknown response after submit'
+                    logger.warning(popup_message)
 
-            except:
-                error_popup = self.page.locator(self.error_popup_xpath)
-                try:
-                    popup_message = error_popup.inner_text().strip()
-                    error_popup.wait_for(state="visible", timeout=5000)
-                    timestamp = time.strftime("%Y%m%d_%H%M%S")
-                    screenshot_path = os.path.join("tests", "screenshots", f"failed_one_{timestamp}.png")
-                    self.page.screenshot(path=screenshot_path)
-                    logger.info(f"Error Message : {popup_message}")
-                    logger.error("This member is already exists in the library members list.")
-                except Exception as e:
-                    popup_message = error_popup.inner_text().strip()
-                    logger.warning(f"{popup_message}")
-            
-            if scenario == "New":
-                if "MEMBER-" in popup_message:
-                    print("Scenario", scenario)
-                    return "Saved"
-                else:
-                    logger.error(f"While saving the new member = {popup_message}")
-                    raise ValueError(f"expected '{member_expectedmsg_read_from_excel}' but got '{popup_message}' ")
-            elif scenario == "Duplicate":
-                if "MEMBER-" in popup_message:
-                    print("Scenario", scenario)
-                    print("DEFECT: Duplicate member was saved successfullt - Validation is message is not shown.")
-                    logger.error("DEFECT: Duplicate member was saved successfullt - Validation is message is not shown.")
-                    return f"DEFECT: Duplicate member was saved successfullt - Validation is message is not shown."
-                elif "exists" in popup_message.lower() or "duplicate" in popup_message.lower():
-                    logger.info("Validation worked correctly — duplicate member not allowed.")
-                    return "This member already exists"
-                else:
-                    logger.warning(f"Unexpected message for duplicate scenario: {popup_message}")
-                    timestamp = time.strftime("%Y%m%d_%H%M%S")
-                    screenshot_path = os.path.join("tests", "screenshots", f"failed_two_{timestamp}.png")
-                    self.page.screenshot(path=screenshot_path)
-                    return "Mandatory for Some Fields."
-            else:
-                logger.warning(f"Invalid scenario: {scenario}")
-                timestamp = time.strftime("%Y%m%d_%H%M%S")
-                screenshot_path = os.path.join("tests", "screenshots", f"failed_three_{timestamp}.png")
-                self.page.screenshot(path=screenshot_path)
-                return "Invalid Scenario"
+            if scenario == 'New':
+                if member_id.startswith('MEMBER-') or 'MEMBER-' in popup_message:
+                    return 'Saved'
+                return popup_message
+
+            if scenario == 'Duplicate':
+                lowered = popup_message.lower()
+                if member_id.startswith('MEMBER-') or 'member-' in lowered:
+                    return 'DEFECT: Duplicate member was saved successfully - validation missing.'
+                if 'exists' in lowered or 'duplicate' in lowered or 'already exists' in lowered:
+                    return 'This member already exists'
+                return popup_message
+
+            return 'Invalid Scenario'
 
         except Exception as e:
             traceback.print_exc()
-            self.page.wait_for_timeout(3000)
-            return f"Exception: {str(e)}"
+            return f'Exception: {str(e)}'
