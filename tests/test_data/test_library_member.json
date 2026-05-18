@@ -1,0 +1,86 @@
+{
+  "login": {
+    "email": "Administrator",
+    "password": "admin",
+    "expected_page_title": "Users"
+  },
+  "library_member": [
+    {
+      "case_id": "TC-001",
+      "description": "Valid member should be saved",
+      "member_name": "John Doe",
+      "email": "john.doe+test1@example.com",
+      "phone": "+919876543210",
+      "date_of_joining": "2026-03-15",
+      "status": "Active",
+      "scenario": "New",
+      "expected": "Saved"
+    },
+    {
+      "case_id": "TC-002",
+      "description": "Duplicate by email should show exists message",
+      "member_name": "Jane Doe",
+      "email": "john.doe+test1@example.com",
+      "phone": "+919123456789",
+      "date_of_joining": "2026-03-14",
+      "status": "Active",
+      "scenario": "Duplicate",
+      "expected": "This member already exists"
+    },
+    {
+      "case_id": "TC-003",
+      "description": "Duplicate by phone should show exists message",
+      "member_name": "Mark Smith",
+      "email": "mark.smith+test@example.com",
+      "phone": "+919876543210",
+      "date_of_joining": "2026-03-13",
+      "status": "Active",
+      "scenario": "Duplicate",
+      "expected": "This member already exists"
+    },
+    {
+      "case_id": "TC-004",
+      "description": "Missing fullname should validate error",
+      "member_name": "",
+      "email": "ann.k@test.com",
+      "phone": "+919112233445",
+      "date_of_joining": "2026-03-10",
+      "status": "Active",
+      "scenario": "New",
+      "expected": "Member name is required"
+    },
+    {
+      "case_id": "TC-005",
+      "description": "Missing email should validate error",
+      "member_name": "Emma Brown",
+      "email": "",
+      "phone": "+919223344556",
+      "date_of_joining": "2026-03-11",
+      "status": "Active",
+      "scenario": "New",
+      "expected": "Email is required"
+    },
+    {
+      "case_id": "TC-006",
+      "description": "Missing fullname and email should validate error",
+      "member_name": "",
+      "email": "",
+      "phone": "+919334455667",
+      "date_of_joining": "2026-03-12",
+      "status": "Active",
+      "scenario": "New",
+      "expected": "Member name is required"
+    },
+    {
+      "case_id": "TC-007",
+      "description": "Invalid email format in membership should show validation",
+      "member_name": "Invalid Email Case",
+      "email": "invalid-email-format",
+      "phone": "+919445566778",
+      "date_of_joining": "2026-03-09",
+      "status": "Active",
+      "scenario": "New",
+      "expected": "Invalid email"
+    }
+  ]
+}
