@@ -43,7 +43,7 @@ class LoginPage:
             return f"Exception: {str(e)}"
     
     # login form field access
-    def login_screen_validate(self, user_email, password, expected_result="Success"):
+    def login_screen_validate(self, user_email, password):
         """Fill login credentials, submit, and validate the result.
 
         Args:
@@ -68,9 +68,6 @@ class LoginPage:
             email_field.fill(user_email)
             password_field.fill(password)
 
-            # timestamp = time.strftime("%Y%m%d_%H%M%S")
-            # screenshot_path = f"//home//pandiaraj//library_management//apps//library_management_system//tests//screenshots//login_form_{timestamp}.png"
-            # self.page.screenshot(path=screenshot_path)
             expect(self.page).to_have_url(self.page.url)  # Wait for page stability
 
             email_valid = email_field.evaluate("el => el.validity.valid")
@@ -106,8 +103,8 @@ class LoginPage:
             
             if apps_popup.is_visible():
                 apps_popup.click()
-            expect(self.page).to_have_title(lambda title: "Users" in title, timeout=10000)
-            return "Login Successful"
+            expect(self.page).to_have_title("Users")
+            return "Users"
         except Exception as e:
             traceback.print_exc()
             expect(self.page).to_have_url(self.page.url)  # Fallback wait
