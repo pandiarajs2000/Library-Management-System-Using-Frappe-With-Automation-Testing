@@ -25,7 +25,7 @@
       "date_of_joining": "2026-03-14",
       "status": "Active",
       "scenario": "Duplicate",
-      "expected": "This member already exists"
+      "expected": "A library member with this email already exists."
     },
     {
       "case_id": "TC-003",
@@ -36,7 +36,7 @@
       "date_of_joining": "2026-03-13",
       "status": "Active",
       "scenario": "Duplicate",
-      "expected": "This member already exists"
+      "expected": "A library member with this phone number already exists."
     },
     {
       "case_id": "TC-004",
@@ -47,7 +47,7 @@
       "date_of_joining": "2026-03-10",
       "status": "Active",
       "scenario": "New",
-      "expected": "Member name is required"
+      "expected": "Mandatory fields required in Library Member Full Name"
     },
     {
       "case_id": "TC-005",
@@ -58,7 +58,7 @@
       "date_of_joining": "2026-03-11",
       "status": "Active",
       "scenario": "New",
-      "expected": "Email is required"
+      "expected": "Mandatory fields required in Library Member Email"
     },
     {
       "case_id": "TC-006",
@@ -69,7 +69,7 @@
       "date_of_joining": "2026-03-12",
       "status": "Active",
       "scenario": "New",
-      "expected": "Member name is required"
+      "expected": "Mandatory fields required in Library Member Full Name Email"
     },
     {
       "case_id": "TC-007",
@@ -80,7 +80,7 @@
       "date_of_joining": "2026-03-09",
       "status": "Active",
       "scenario": "New",
-      "expected": "Invalid email"
+      "expected": "invalid-email-format is not a valid Email Address"
     }
   ]
 }
