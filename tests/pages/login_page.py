@@ -36,6 +36,7 @@ class LoginPage:
             self.page.goto(url)
             self.page.wait_for_load_state("networkidle")
             site_url = self.page.url
+            logger.info(f"Loaded login page: {site_url}")
             return site_url
         except Exception as e:
             logger.error(f"Error while loading login page: {str(e)}")
@@ -90,6 +91,10 @@ class LoginPage:
             login_btn = self.page.locator(self.login_btn_xpath)
             login_btn.click()
             logger.info("Clicked login button.")
+            self.page.wait_for_timeout(1000)
+            current_url = self.page.url
+            current_title = self.page.title()
+            logger.info(f"After login click: URL={current_url}, Title={current_title}")
 
             error_button_check = self.page.locator(self.login_fail_text)
             apps_popup = self.page.locator(self.apps_popup_xpath)
