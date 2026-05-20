@@ -25,15 +25,15 @@ class LibraryMember:
     def _read_popup_message(self):
         error_popup = self.page.locator(self.error_popup_xpath)
         if error_popup.is_visible(timeout=3000):
+            print("Error popup is visible, reading message.", error_popup.inner_text())
             return error_popup.inner_text().strip()
-        return ''
 
     def validate_library_member_screen(self, fullname, email, phone, doj, status, scenario, member_expectedmsg_read_from_excel):
         try:
             logger.info('Search the Library Member List')
             search_input = self.page.locator(self.search_box_xpath)
             search_input.fill('Library Member')
-            search_input.press('ArrowDown')
+            # search_input.press('ArrowDown')
             self.page.wait_for_timeout(500)
             search_input.press('Enter')
 
@@ -58,6 +58,7 @@ class LibraryMember:
             phone_input.fill(phone)
 
             if isinstance(doj, datetime):
+                logger.info(f'Formatting date of joining from datetime object: {doj}')
                 date_str = doj.strftime('%Y-%m-%d')
             else:
                 date_str = str(doj or '').split(' ')[0].strip()
@@ -87,18 +88,21 @@ class LibraryMember:
                 member_id = self.page.locator(self.member_id_xpath).inner_text().strip()
                 popup_message = member_id
                 logger.info(f'member id text {popup_message}')
-                screenshot_path = os.path.join('tests', 'screenshots', f"member_data_save_{time.strftime('%Y%m%d_%H%M%S')}.png")
+                screenshot_path = os.path.join('screenshots', f"member_data_save_{time.strftime('%Y%m%d_%H%M%S')}.png")
                 self.page.screenshot(path=screenshot_path)
                 logger.info('Document saved successfully via page indicator.')
+                self.page.go_back()
             except Exception:
                 popup_message = self._read_popup_message()
                 if popup_message:
-                    screenshot_path = os.path.join('tests', 'screenshots', f"failed_{time.strftime('%Y%m%d_%H%M%S')}.png")
+                    screenshot_path = os.path.join('screenshots', f"failed_{time.strftime('%Y%m%d_%H%M%S')}.png")
                     self.page.screenshot(path=screenshot_path)
                     logger.info(f'Error Message : {popup_message}')
+                    return " ".join(popup_message.split())
                 else:
-                    popup_message = 'Unknown response after submit'
+                    popup_message = 'Unknown response after save attempt'
                     logger.warning(popup_message)
+                    return " ".join(popup_message.split())
 
             if scenario == 'New':
                 if member_id.startswith('MEMBER-') or 'MEMBER-' in popup_message:
@@ -111,7 +115,7 @@ class LibraryMember:
                     return 'DEFECT: Duplicate member was saved successfully - validation missing.'
                 if 'exists' in lowered or 'duplicate' in lowered or 'already exists' in lowered:
                     return 'This member already exists'
-                return popup_message
+                return " ".join(popup_message.split())
 
             return 'Invalid Scenario'
 
